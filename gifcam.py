@@ -43,6 +43,8 @@ camera.rotation = 90
 #camera.brightness = 70
 camera.image_effect = 'none'
 ##GPIO.output(led_2, 1)
+camera.start_preview()
+time.sleep(2)
 
 # Indicate ready status
 buttonLed.start(100)
@@ -53,25 +55,17 @@ print('System Ready')
 try:
     while True:
         if GPIO.input(button) == False: # Button Pressed
-        
-            print("button")
             ### TAKING PICTURES ###
             print('Gif Started')
             statusLed.ChangeDutyCycle(0)
             buttonLed.ChangeDutyCycle(50)
 
-            randomstring = time.strftime('%Y%m%d%H%M%S')
-            tmp = 'tmp/%s' %(randomstring)
-            raw = 'raw/%s' %(randomstring)
-            os.makedirs(tmp)
-            for i in range(num_frame):
-                number = '{0:04d}'.format(i)
-                camera.capture('tmp/%s/%s.jpg' %(randomstring, number))
-
-            shutil.move(tmp, raw)
+            name = time.strftime('%Y%m%d%H%M%S')
+            camera.start_recording('tmp/%s.h264' %(name))
+            camera.wait_recording(3)
+            camera.stop_recording()
+            os.system("mv ./tmp/" + name + ".h264 ./raw/" + name) # cleanup source images
             print('Done')
-            print('System Ready')
-
             buttonLed.ChangeDutyCycle(0)
 
         else : # Button NOT pressed
