@@ -14,7 +14,6 @@ import shutil
 #
 ########################
 num_frame = 8       # Number of frames in Gif
-gif_delay = 15      # Frame delay [ms]
 ########################
 #
 # Define GPIO

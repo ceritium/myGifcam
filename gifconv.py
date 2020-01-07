@@ -9,7 +9,6 @@ import shutil
 #
 ########################
 num_frame = 8       # Number of frames in Gif
-gif_delay = 15      # Frame delay [ms]
 rebound = True      # Create a video that loops start <=> end
 
 print('Gifconv Ready')
@@ -26,8 +25,8 @@ try:
                 copyCommand = "cp raw/" + d + "/" + source + " raw/" + d + "/" + dest
                 os.system(copyCommand)
 
-            graphicsmagick = "gm convert -delay " + str(gif_delay) + " " + "raw/" + d +"/*.jpg tmp/" + d + ".gif" 
-            os.system(graphicsmagick)
+            command = "ffmpeg -framerate 8 -pattern_type glob -i 'raw/" + d + "/*.jpg' tmp/" + d + ".gif"
+            os.system(command)
             os.system("mv ./tmp/" + d + ".gif ./gifs/") # cleanup source images
             os.system("rm -rf ./raw/" + d) # cleanup source images
             print('Done ' + d)
