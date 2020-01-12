@@ -6,6 +6,6 @@ cd /
 cd home/pi/gifcam
 sudo python gifcam.py &
 sudo python gifconv.py &
-cd gifs
+cd /mnt/usb_share/gifcam
 sudo python -m SimpleHTTPServer 80 &
 cd /

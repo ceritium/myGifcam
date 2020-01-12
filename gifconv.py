@@ -18,7 +18,7 @@ try:
             print('Processing ' + d)
             command = "ffmpeg -i raw/" + d + " -vf 'fps=10' -gifflags +transdiff -y tmp/" + d + ".gif"
             os.system(command)
-            os.system("mv ./tmp/" + d + ".gif ./gifs/") # cleanup source images
+            os.system("mv ./tmp/" + d + ".gif /mnt/usb_share/gifcam") # cleanup source images
             os.system("rm -rf ./raw/" + d) # cleanup source image
             print('Done ' + d)
 
